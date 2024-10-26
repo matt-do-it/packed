@@ -1,0 +1,13 @@
+#cloud-config
+
+system_info:
+  default_user:
+    name: dev
+    home: dev
+
+password: dev
+
+chpasswd:
+  expire: False
+  
+ssh_pwauth: True
