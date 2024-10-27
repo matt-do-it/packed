@@ -1,0 +1,23 @@
+DISTRIBUTIONS="kernel.txz base.txz"
+export ZFSBOOT_DISKS="vtbd0"
+export ZFSBOOT_SWAP_SIZE="0g"
+export nonInteractive="YES"
+
+#!/bin/sh
+sysrc ifconfig_DEFAULT=SYNCDHCP
+sysrc sshd_enable=YES
+
+# Permit root login
+sed -i '' -e 's/^#PermitRootLogin no/PermitRootLogin yes/' /etc/ssh/sshd_config
+
+# Change root's password to packer
+echo 'packer' | pw usermod root -h 0
+
+# The console is not interactive, so we might as well boot quickly
+#sysrc -f /boot/loader.conf autoboot_delay=-1
+
+# Fix boot order
+efibootmgr -o 2,3,4,1,0
+
+# Reboot
+shutdown -r now
