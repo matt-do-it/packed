@@ -8,14 +8,14 @@ packer {
 }
 
 source "qemu" "ubuntu" {
-  iso_url           = "https://cloud-images.ubuntu.com/releases/24.04/release/ubuntu-24.04-server-cloudimg-amd64.img"
-  iso_checksum 		= "sha256:5d482ff93a2ba3cf7e609551733ca238ed81a6afdaafcdce53140546b09a6195"
+  iso_url           = "/Users/herold/Downloads/ubuntu-24.10-server-cloudimg-amd64.img"
+  iso_checksum 		= "sha256:ee070d95a2ba5a1500264e75b3e14aa85518220c24d25f1535407c55f0e33e4d"
   disk_image 		= true
   efi_firmware_code = "../Firmware/code-ubuntu-amd64.img"
   efi_firmware_vars = "../Firmware/vars-ubuntu-amd64.img"
   output_directory  = "image_ubuntu_amd64"
   qemu_binary       = "qemu-system-x86_64"
-  disk_size         = "20G"
+  disk_size         = "5G"
   format            = "raw"
   display 			= "cocoa"
   ssh_username      = "dev"
@@ -25,10 +25,12 @@ source "qemu" "ubuntu" {
   net_device        = "virtio-net-pci"
   disk_interface    = "virtio"
   boot_wait         = "5s"
-  http_directory    = "http_ubuntu"
   shutdown_command  = "sudo shutdown -P now"
   
   qemuargs=[           
+    ["-machine", "q35,accel=tcg"],
+    ["-cpu", "max"],
+    ["-smp", "4"],
       ["-boot", "strict=off"],
       ["-device", "qemu-xhci"],
       ["-device", "usb-kbd"],

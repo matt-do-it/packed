@@ -1,6 +1,8 @@
 #!/bin/sh
 
-apt-get install \
+apt-get -y update 
+
+apt-get -y install \
           binutils \
           git \
           gnupg2 \
@@ -20,12 +22,9 @@ apt-get install \
           zlib1g-dev
 
 
-apt-get install sshfs
-
 mkdir /opt/swift
 cd /opt/swift
 curl -LO https://download.swift.org/swift-5.10.1-release/ubuntu2404/swift-5.10.1-RELEASE/swift-5.10.1-RELEASE-ubuntu24.04.tar.gz
 
 tar xzf swift-5.10.1-RELEASE-ubuntu24.04.tar.gz
 
-mkdir -p /Volumes/Shared
