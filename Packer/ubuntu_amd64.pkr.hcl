@@ -8,7 +8,8 @@ packer {
 }
 
 source "qemu" "ubuntu" {
-  iso_url           = "/Users/herold/Downloads/ubuntu-24.10-server-cloudimg-amd64.img"
+  iso_url			= "https://cloud-images.ubuntu.com/releases/24.10/release/ubuntu-24.10-server-cloudimg-amd64.img"
+#  iso_url           = "/Users/herold/Downloads/ubuntu-24.10-server-cloudimg-amd64.img"
   iso_checksum 		= "sha256:ee070d95a2ba5a1500264e75b3e14aa85518220c24d25f1535407c55f0e33e4d"
   disk_image 		= true
   efi_firmware_code = "../Firmware/code-ubuntu-amd64.img"
